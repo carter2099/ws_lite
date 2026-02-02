@@ -1,9 +1,10 @@
 ws-client
 =========
-Successor to [websocket-client-simple](https://github.com/ruby-jp/websocket-client-simple) with OpenSSL 3.x fixes and improved connection reliability.
+[![Gem Version](https://badge.fury.io/rb/ws-client.svg)](https://rubygems.org/gems/ws-client)
+[![Downloads](https://img.shields.io/gem/dt/ws-client.svg)](https://rubygems.org/gems/ws-client)
+[![CI](https://github.com/carter2099/ws-client/actions/workflows/test.yml/badge.svg)](https://github.com/carter2099/ws-client/actions)
 
-- https://github.com/carter2099/ws-client
-- https://rubygems.org/gems/ws-client
+Successor to [websocket-client-simple](https://github.com/ruby-jp/websocket-client-simple) with OpenSSL 3.x fixes and improved connection reliability.
 
 Installation
 ------------
