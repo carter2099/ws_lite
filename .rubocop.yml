@@ -5,6 +5,7 @@ AllCops:
   Exclude:
     - 'test/**/*'
     - 'sample/**/*'
+    - 'vendor/**/*'  # Exclude vendored gems (CI bundles here)
 
 # The upstream code style uses hash rockets and other conventions we preserve
 Style/HashSyntax:
