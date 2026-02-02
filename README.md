@@ -1,17 +1,14 @@
-websocket-client-simple
-=======================
-Simple WebSocket Client for Ruby (original author: @shokai)
+ws-client
+=========
+Successor to [websocket-client-simple](https://github.com/ruby-jp/websocket-client-simple) with OpenSSL 3.x fixes and improved connection reliability.
 
-- https://github.com/ruby-jp/websocket-client-simple
-- https://rubygems.org/gems/websocket-client-simple
-
-[![.github/workflows/test.yml](https://github.com/ruby-jp/websocket-client-simple/actions/workflows/test.yml/badge.svg)](https://github.com/ruby-jp/websocket-client-simple/actions/workflows/test.yml)
+- https://github.com/carter2099/ws-client
+- https://rubygems.org/gems/ws-client
 
 Installation
 ------------
 
-    gem install websocket-client-simple
-
+    gem install ws-client
 
 Usage
 -----
@@ -56,10 +53,23 @@ WebSocket::Client::Simple.connect 'ws://example.com:8888' do |ws|
 end
 ```
 
+### SSL Options
+
+Pass a custom `OpenSSL::SSL::SSLContext` for full control over TLS settings:
+
+```ruby
+ctx = OpenSSL::SSL::SSLContext.new
+ctx.verify_mode = OpenSSL::SSL::VERIFY_PEER
+
+ws = WebSocket::Client::Simple.connect 'wss://example.com', ssl_context: ctx
+```
+
+By default, `OP_IGNORE_UNEXPECTED_EOF` is enabled on OpenSSL 3.x to prevent `SSL_read: unexpected eof while reading` errors when servers close connections without a TLS `close_notify` alert.
+
 
 Sample
 ------
-[websocket chat](https://github.com/ruby-jp/websocket-client-simple/tree/master/sample)
+[websocket chat](https://github.com/carter2099/ws-client/tree/master/sample)
 
 
 Test

@@ -20,12 +20,7 @@ module WebSocket
           @socket = TCPSocket.new(uri.host,
                                   uri.port || (uri.scheme == 'wss' ? 443 : 80))
           if ['https', 'wss'].include? uri.scheme
-            ctx = OpenSSL::SSL::SSLContext.new
-            ctx.ssl_version = options[:ssl_version] if options[:ssl_version]
-            ctx.verify_mode = options[:verify_mode] if options[:verify_mode]
-            cert_store = options[:cert_store] || OpenSSL::X509::Store.new
-            cert_store.set_default_paths
-            ctx.cert_store = cert_store
+            ctx = options[:ssl_context] || build_ssl_context(options)
             @socket = ::OpenSSL::SSL::SSLSocket.new(@socket, ctx)
             @socket.sync_close = true
             @socket.hostname = uri.host
@@ -46,8 +41,8 @@ module WebSocket
             while !@closed do
               begin
                 unless recv_data = @socket.getc
-                  sleep 1
-                  next
+                  emit :__close
+                  break
                 end
                 unless @handshaked
                   @handshake << recv_data
@@ -61,6 +56,13 @@ module WebSocket
                     emit :message, msg
                   end
                 end
+              rescue IOError, Errno::ECONNRESET, Errno::EPIPE => e
+                emit :__close, e
+                break
+              rescue OpenSSL::SSL::SSLError => e
+                emit :error, e
+                emit :__close, e
+                break
               rescue => e
                 emit :error, e
               end
@@ -103,6 +105,21 @@ module WebSocket
 
         def closed?
           @closed
+        end
+
+        private
+
+        def build_ssl_context(options)
+          ctx = OpenSSL::SSL::SSLContext.new
+          ctx.ssl_version = options[:ssl_version] if options[:ssl_version]
+          ctx.verify_mode = options[:verify_mode] if options[:verify_mode]
+          if defined?(OpenSSL::SSL::OP_IGNORE_UNEXPECTED_EOF)
+            ctx.options |= OpenSSL::SSL::OP_IGNORE_UNEXPECTED_EOF
+          end
+          cert_store = options[:cert_store] || OpenSSL::X509::Store.new
+          cert_store.set_default_paths
+          ctx.cert_store = cert_store
+          ctx
         end
 
       end

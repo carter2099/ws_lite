@@ -1,6 +1,12 @@
 # Changelog
 
-## Not yet released
+## 0.10.0
+
+* Fix OpenSSL 3.x compatibility: enable `OP_IGNORE_UNEXPECTED_EOF` by default so that server-side TCP closes without TLS `close_notify` are treated as clean EOF instead of raising `SSL_read: unexpected eof while reading`
+* Add `ssl_context` option to `connect` for passing a fully configured `OpenSSL::SSL::SSLContext`
+* Extract `build_ssl_context` private method for cleaner SSL setup
+* Fix infinite loop when `getc` returns nil on server disconnect (now emits `:close` and breaks) #27
+* Fix read thread not terminating on SSL and IO errors (now emits `:close` and breaks instead of only `:error`) #35
 
 ## 0.9.0 - 2024-12-31
 * Add mutex_m and base46 to runtime dependencies #31
