@@ -1,18 +1,29 @@
-ws_lite
-=======
+# ws_lite
+
 [![Gem Version](https://badge.fury.io/rb/ws_lite.svg)](https://rubygems.org/gems/ws_lite)
 [![Downloads](https://img.shields.io/gem/dt/ws_lite.svg)](https://rubygems.org/gems/ws_lite)
 [![CI](https://github.com/carter2099/ws_lite/actions/workflows/test.yml/badge.svg)](https://github.com/carter2099/ws_lite/actions)
 
 Successor to [websocket-client-simple](https://github.com/ruby-jp/websocket-client-simple) with OpenSSL 3.x fixes and improved connection reliability.
 
-Installation
-------------
+## Installation
 
-    gem install ws_lite
+Add this line to your application's Gemfile:
 
-Usage
------
+```ruby
+gem 'ws_lite'
+```
+
+And then execute:
+
+    $ bundle install
+
+Or install it yourself as:
+
+    $ gem install ws_lite
+
+## Usage
+
 ```ruby
 require 'ws_lite'
 
@@ -67,25 +78,15 @@ ws = WSLite.connect 'wss://example.com', ssl_context: ctx
 
 By default, `OP_IGNORE_UNEXPECTED_EOF` is enabled on OpenSSL 3.x to prevent `SSL_read: unexpected eof while reading` errors when servers close connections without a TLS `close_notify` alert.
 
+## Development
 
-Sample
-------
-[websocket chat](https://github.com/carter2099/ws_lite/tree/master/sample)
+    $ bundle install
+    $ rake
 
+## Contributing
 
-Test
-----
+Bug reports and pull requests are welcome on GitHub at https://github.com/carter2099/ws_lite.
 
-    % gem install bundler
-    % bundle install
-    % export WS_PORT=8888
-    % rake test
+## License
 
-
-Contributing
-------------
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
