@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.summary       = spec.description
   spec.homepage      = "https://github.com/carter2099/ws_lite"
   spec.license       = "MIT"
-  spec.required_ruby_version = '>= 3.4.0'
+  spec.required_ruby_version = '>= 3.3.0'
 
   if spec.respond_to?(:metadata)
     spec.metadata["homepage_uri"] = spec.homepage

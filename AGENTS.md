@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-ws_lite is a lightweight WebSocket client library for Ruby (successor to websocket-client-simple). It provides an event-driven API for connecting to WebSocket servers with support for secure connections (WSS) and custom SSL options. Requires Ruby >= 3.4.0.
+ws_lite is a lightweight WebSocket client library for Ruby (successor to websocket-client-simple). It provides an event-driven API for connecting to WebSocket servers with support for secure connections (WSS) and custom SSL options. Requires Ruby >= 3.3.0.
 
 ## Commands
 
@@ -45,4 +45,4 @@ ruby -Ilib:test test/test_websocket_client_simple.rb
 
 ## Code Style
 
-RuboCop configured for Ruby 3.4+ with 120-character line limit. The client.rb file has relaxed method length/complexity metrics due to inherent WebSocket protocol complexity.
+RuboCop configured for Ruby 3.3+ with 120-character line limit. The client.rb file has relaxed method length/complexity metrics due to inherent WebSocket protocol complexity.
